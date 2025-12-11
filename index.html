@@ -40,14 +40,14 @@
             height: 100%;
             z-index: -1; /* Detrás de todo */
             overflow: hidden;
-            opacity: 0.2; /* MODIFICADO: Reducido de 0.8 a 0.2 para mayor sutileza */
+            opacity: 0.2; 
             pointer-events: none;
         }
 
         #scrolling-bg {
             width: 100%;
             /* La altura no importa tanto, el contenido la dictará */
-            animation: scrollUp 40s linear infinite; /* Desplazamiento más rápido (40s) */
+            animation: scrollUp 40s linear infinite; 
         }
 
         /* El truco del scroll infinito: mover 50% hacia arriba (porque hay 2 copias) */
@@ -238,6 +238,24 @@
             height: 30px;
             fill: var(--copper-mid);
             margin-bottom: 10px;
+        }
+        
+        /* ESTILOS NUEVOS PARA EL MAPA */
+        .map-container {
+            width: 100%;
+            height: 200px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            border-radius: 15px; /* Esquinas redondeadas */
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(184, 115, 51, 0.2);
+            border: 1px solid rgba(184, 115, 51, 0.3);
+        }
+        
+        .map-iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
         }
 
         .gift-section {
@@ -431,9 +449,22 @@
                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                 </svg>
                 <h3>Lugar</h3>
-                <p>Salón de Eventos</p> 
-                <p>Dirección Pendiente</p> 
-                <a href="#" style="color: var(--copper-mid); font-size: 0.9rem;">Ver ubicación</a>
+                
+                <!-- SECCIÓN ACTUALIZADA: NOMBRE, DIRECCIÓN Y MAPA VISUAL -->
+                <!-- He puesto la dirección correspondiente a las coordenadas -->
+                <p style="font-weight: bold; font-size: 1.1rem; margin-bottom: 5px;">Ubicación del Evento</p> 
+                <p>San Luis Apizaquito, Apizaco, Tlaxcala</p> 
+
+                <div class="map-container">
+                    <!-- Mapa apuntando a 19.4138432, -98.1340485 -->
+                    <iframe class="map-iframe" 
+                            src="https://maps.google.com/maps?q=19.4138432,-98.1340485&t=&z=17&ie=UTF8&iwloc=&output=embed" 
+                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+                    </iframe>
+                </div>
+
+                <!-- URL DE MAPA ACTUALIZADA -->
+                <a href="https://www.google.com/maps/search/?api=1&query=19.4138432,-98.1340485" target="_blank" style="color: var(--copper-mid); font-size: 0.9rem;">Ver ubicación en Google Maps</a>
             </div>
         </div>
 
