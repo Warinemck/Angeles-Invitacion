@@ -125,17 +125,20 @@
         /* --- DISEÑO DEL TÍTULO 70 (AUMENTADO DE TAMAÑO) --- */
         .title-design-container {
             position: relative;
-            height: 320px; 
+            /* MODIFICADO: Aumentado a 500px para soportar 33rem */
+            height: 500px; 
             display: flex;
             justify-content: center;
             align-items: center;
             margin-top: 10px;
             z-index: 5; 
+            overflow: visible; /* Permitir que salga un poco si es necesario */
         }
 
         .big-number {
             font-family: 'Playfair Display', serif;
-            font-size: 16rem; 
+            /* MODIFICADO: Tamaño solicitado de 33rem */
+            font-size: 33rem; 
             line-height: 0.8;
             color: var(--copper-mid); /* Fallback */
             background: linear-gradient(45deg, #8B4513, #B87333, #D4AF37, #B87333);
@@ -144,7 +147,8 @@
             font-style: italic;
             position: relative;
             z-index: 1;
-            letter-spacing: -10px; /* Juntar un poco los números */
+            /* MODIFICADO: Ajustado para que no se separen tanto al ser tan grandes */
+            letter-spacing: -25px; 
         }
 
         .zero-wrapper {
@@ -154,10 +158,12 @@
 
         .name-overlay {
             position: absolute;
-            top: 52%; /* Ajuste fino de posición */
+            top: 68%; 
             left: 55%; /* Centrado visual dentro del cero */
-            transform: translate(-50%, -50%) rotate(-15deg); /* Rotación ligera */
+            /* MODIFICADO: Rotación -90deg para vertical */
+            transform: translate(-50%, -50%) rotate(-77deg); 
             font-family: 'Great Vibes', cursive;
+            /* MODIFICADO: Aumentado para coincidir con la escala del 70 */
             font-size: 6rem; 
             color: var(--copper-dark);
             text-shadow: 
@@ -404,7 +410,7 @@
         </div>
 
         <div class="header">
-            <div style="font-family: 'Great Vibes', cursive; font-size: 2rem; color: var(--copper-dark); margin-bottom: -10px;">
+            <div style="font-family: 'Great Vibes', cursive; font-size: 7rem; color: var(--copper-dark); margin-bottom: -10px;">
                 ¡Celebramos!
             </div>
 
@@ -453,7 +459,7 @@
                 <!-- SECCIÓN ACTUALIZADA: NOMBRE, DIRECCIÓN Y MAPA VISUAL -->
                 <!-- He puesto la dirección correspondiente a las coordenadas -->
                 <p style="font-weight: bold; font-size: 1.1rem; margin-bottom: 5px;">Ubicación del Evento</p> 
-                <p>San Luis Apizaquito, Apizaco, Tlaxcala</p> 
+                <p>Gomez Farias No. 10, Apizaco, Tlaxcala</p> 
 
                 <div class="map-container">
                     <!-- Mapa apuntando a 19.4138432, -98.1340485 -->
