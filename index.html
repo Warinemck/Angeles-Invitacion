@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invitación 70 Años - Angeles</title>
-    <!-- Fuentes de Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- Fuentes de Google: Agregada 'Pinyon Script' para el nombre -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&family=Great+Vibes&family=Pinyon+Script&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -31,10 +31,8 @@
             position: relative;
         }
 
-        /* --- CLASES NUEVAS PARA LAS FLORES (EL TRUCO) --- */
+        /* --- CLASES DECORATIVAS --- */
         .blend-img {
-            /* ESTE ES EL TRUCO: Multiplica el color de la imagen con el fondo. 
-               El blanco se vuelve transparente. */
             mix-blend-mode: multiply; 
             display: block;
             max-width: 100%;
@@ -43,7 +41,7 @@
 
         .flower-top {
             width: 80%;
-            margin: -20px auto 10px auto; /* Margen negativo para subirla */
+            margin: -20px auto 10px auto; 
             position: relative;
             z-index: 10;
         }
@@ -54,129 +52,66 @@
             opacity: 0.9;
         }
 
-        /* Contenedor para las ramas laterales */
         .side-decoration-container {
             position: relative;
             width: 100%;
-            height: 0; /* No ocupa espacio vertical, solo flota */
+            height: 0; 
             overflow: visible;
             z-index: 0;
         }
 
         .flower-side {
             position: absolute;
-            width: 80px; /* Tamaño de la rama */
+            width: 80px; 
             opacity: 0.7;
-            top: -100px; /* Ajuste vertical relativo al texto */
+            top: -100px; 
         }
 
         .side-left {
             left: -10px;
-            transform: scaleX(-1); /* Espejo para el lado izquierdo */
+            transform: scaleX(-1); 
         }
 
         .side-right {
             right: -10px;
         }
 
-        /* --- NUEVO: SISTEMA DE PARALLAX (Flores flotantes) --- */
+        /* --- PARALLAX (Flores flotantes) --- */
         .parallax-wrapper {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none; /* IMPORTANTE: Permite dar clic a través de las imágenes */
-            z-index: 20; /* Por encima del contenido normal */
+            pointer-events: none; 
+            z-index: 20; 
             overflow: hidden;
         }
 
         .parallax-flower {
             position: absolute;
-            /* mix-blend-mode: multiply;  <-- Ya no es necesario con PNGs transparentes */
-            
-            /* MODIFICADO: Filtro para efecto cobre metálico + MENOS BLUR (DESENFOQUE) */
             filter: sepia(0.8) saturate(1.5) hue-rotate(10deg) brightness(0.9) blur(1px);
-            
             opacity: 0.9; 
             transition: transform 0.1s linear; 
-            
-            /* PROPIEDAD CLAVE PARA RESPONSIVIDAD: 
-               La imagen mantendrá su relación de aspecto automáticamente */
             height: auto;
         }
 
-        /* --- ACTUALIZACIÓN DE POSICIONES Y TAMAÑOS (CENTRO EN ESQUINA) --- 
-           La lógica es: top/left negativo = -(ancho / 2). 
-           Esto pone el centro geométrico de la flor en la esquina de la pantalla.
-        */
+        /* Posiciones Parallax (Centro en Esquina) */
+        .p-flower-1 { top: -17.5vw; left: -17.5vw; width: 35vw; transform: rotate(45deg); }
+        .p-flower-2 { top: -22.5vw; right: -22.5vw; width: 45vw; transform: rotate(-15deg); }
+        .p-flower-3 { bottom: -20vw; left: -20vw; width: 40vw; transform: rotate(20deg); }
+        .p-flower-4 { top: 50%; right: -17.5vw; width: 35vw; margin-top: -17.5vw; transform: rotate(-90deg); }
+        .p-flower-5 { top: 15vw; left: -9vw; width: 25vw; transform: rotate(10deg); }
+        .p-flower-6 { top: auto; bottom: -21vw; right: -21vw; width: 42vw; transform: rotate(-20deg); }
 
-        .p-flower-1 {
-            /* Esquina Superior Izquierda */
-            /* width: 35vw -> mitad ~17.5vw */
-            top: -17.5vw; 
-            left: -17.5vw; 
-            width: 35vw; 
-            transform: rotate(45deg);
-        }
-
-        .p-flower-2 {
-            /* Esquina Superior Derecha */
-            /* width: 45vw -> mitad ~22.5vw */
-            top: -22.5vw; 
-            right: -22.5vw; 
-            width: 45vw; 
-            transform: rotate(-15deg);
-        }
-
-        .p-flower-3 {
-            /* Esquina Inferior Izquierda */
-            /* width: 40vw -> mitad ~20vw */
-            bottom: -20vw; 
-            left: -20vw; 
-            width: 40vw; 
-            transform: rotate(20deg);
-        }
-
-        /* Flor CENTRADA VERTICALMENTE en el borde derecho (p-flower-4) */
-        .p-flower-4 {
-            top: 50%; /* Centro vertical */
-            /* width: 35vw -> mitad fuera ~17.5vw */
-            right: -17.5vw; 
-            width: 35vw; 
-            margin-top: -17.5vw; /* Centrado vertical exacto */
-            transform: rotate(-90deg);
-        }
-
-        /* --- NUEVAS FLORES AGREGADAS (5 y 6) --- */
-        
-        /* Izquierda Arriba (Refuerzo - Ligeramente desfasada) */
-        .p-flower-5 {
-            /* width: 38vw -> mitad ~19vw */
-            top: 15vw;  /* Un poco más adentro verticalmente para variedad */
-            left: -9vw;
-            width: 25vw;
-            transform: rotate(10deg);
-        }
-
-        /* Derecha Abajo (Refuerzo) */
-        .p-flower-6 {
-            top: auto; 
-            /* width: 42vw -> mitad ~21vw */
-            bottom: -21vw; 
-            right: -21vw;
-            width: 42vw;
-            transform: rotate(-20deg);
-        }
-
-        /* --- SISTEMA DE FONDO (SCROLL + ROTACIÓN) --- */
+        /* --- FONDO ANIMADO --- */
         #background-wrapper {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Detrás de todo */
+            z-index: -1; 
             overflow: hidden;
             opacity: 0.2; 
             pointer-events: none;
@@ -184,53 +119,46 @@
 
         #scrolling-bg {
             width: 100%;
-            /* La altura no importa tanto, el contenido la dictará */
             animation: scrollUp 40s linear infinite; 
         }
 
-        /* El truco del scroll infinito: mover 50% hacia arriba (porque hay 2 copias) */
         @keyframes scrollUp {
             0% { transform: translateY(0); }
             100% { transform: translateY(-50%); }
         }
 
-        /* SVG se ajusta al ancho de la pantalla */
         .bg-svg-layer {
             display: block;
             width: 100%;
-            height: auto; /* Mantener proporción */
+            height: auto; 
         }
 
-        /* Animación de rotación individual para las flores */
         @keyframes rotateFlower {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
+        /* --- CONTENEDOR PRINCIPAL --- */
         .container {
             max-width: 600px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.5); /* Fondo más transparente para que se note el multiply */
-            /* Alternativa: Si quieres fondo blanco sólido en la carta, el multiply funciona mejor sobre crema
-               pero aquí forzaremos un poco el tono crema dentro si es necesario, o lo dejamos sutil */
+            background: rgba(255, 255, 255, 0.5); 
             background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(250, 243, 224, 0.9)); 
             box-shadow: 0 0 40px rgba(139, 69, 19, 0.15);
             min-height: 100vh;
             text-align: center;
             padding-bottom: 50px;
-            padding-top: 20px; /* Espacio extra arriba */
+            padding-top: 20px; 
             border-left: 1px solid rgba(184, 115, 51, 0.2);
             border-right: 1px solid rgba(184, 115, 51, 0.2);
             position: relative;
-            z-index: 1; /* Asegurar que el contenido esté sobre el fondo */
+            z-index: 1; 
         }
 
         h1, h2, h3 {
             font-family: 'Playfair Display', serif;
             color: var(--copper-mid);
         }
-
-        /* Eliminé el .minimalist-header anterior con la foto cuadrada para usar las flores nuevas */
 
         .header {
             padding-top: 10px;
@@ -239,69 +167,64 @@
             z-index: 2;
         }
 
-        /* Clase nueva para el texto Celebramos */
         .celebrate-text {
             font-family: 'Great Vibes', cursive; 
-            font-size: 5rem; /* Ajustado para balancear con las flores */
+            font-size: 5rem; 
             color: var(--copper-dark); 
             margin-bottom: -10px;
             margin-top: 20px;
             line-height: 1.1;
         }
 
-        /* --- DISEÑO DEL TÍTULO 70 (AUMENTADO DE TAMAÑO) --- */
+        /* --- MODIFICACIÓN DEL TÍTULO 70 Y NOMBRE (STACK VERTICAL) --- */
         .title-design-container {
             position: relative;
-            /* MODIFICADO: Aumentado a 500px para soportar 33rem */
-            height: 450px; 
+            height: auto; 
             display: flex;
+            flex-direction: column; /* Apilar elementos verticalmente */
             justify-content: center;
             align-items: center;
             margin-top: 10px;
             z-index: 5; 
-            overflow: visible; /* Permitir que salga un poco si es necesario */
+            overflow: visible; 
         }
 
         .big-number {
             font-family: 'Playfair Display', serif;
-            /* MODIFICADO: Tamaño solicitado de 33rem */
             font-size: 30rem; 
-            line-height: 0.8;
-            color: var(--copper-mid); /* Fallback */
+            line-height: 0.8; 
+            color: var(--copper-mid); 
             background: linear-gradient(45deg, #8B4513, #B87333, #D4AF37, #B87333);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-style: italic;
             position: relative;
             z-index: 1;
-            /* MODIFICADO: Ajustado para que no se separen tanto al ser tan grandes */
             letter-spacing: -25px; 
+            /* MODIFICADO: Mayor margen negativo para subir el 70 y juntarlo al nombre bajado */
+            margin-top: -80px;
         }
 
-        .zero-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-
+        /* Estilo actualizado para "Angeles" ARRIBA del número */
         .name-overlay {
-            position: absolute;
-            top: 68%; 
-            left: 55%; /* Centrado visual dentro del cero */
-            /* MODIFICADO: Rotación -90deg para vertical */
-            transform: translate(-50%, -50%) rotate(-77deg); 
-            font-family: 'Great Vibes', cursive;
-            /* MODIFICADO: Aumentado para coincidir con la escala del 70 */
-            font-size: 5.5rem; 
+            position: relative;
+            /* MODIFICADO: Top positivo para bajar el nombre */
+            top: 30px; 
+            left: auto;
+            transform: rotate(-5deg); 
+            
+            font-family: 'Pinyon Script', cursive; 
+            font-size: 8rem; 
             color: var(--copper-dark);
+            
             text-shadow: 
-                3px 3px 0px rgba(255, 255, 255, 0.9),
-                -1px -1px 0 rgba(255, 255, 255, 0.9),  
-                1px -1px 0 rgba(255, 255, 255, 0.9),
-                -1px 1px 0 rgba(255, 255, 255, 0.9),
-                1px 1px 0 rgba(255, 255, 255, 0.9); /* Borde blanco más fuerte */
+                3px 3px 0px rgba(255, 255, 255, 0.95),
+                -1px -1px 0 rgba(255, 255, 255, 0.95);
+            
             white-space: nowrap;
             z-index: 10;
             width: auto;
+            margin-bottom: 10px;
         }
 
         .years-label {
@@ -310,7 +233,7 @@
             color: var(--copper-mid);
             letter-spacing: 5px;
             text-transform: uppercase;
-            margin-top: 10px; 
+            margin-top: 20px; 
             margin-bottom: 30px;
         }
 
@@ -356,7 +279,7 @@
             margin-bottom: 10px;
             font-style: italic;
             position: relative;
-            z-index: 2; /* Sobre las ramas */
+            z-index: 2; 
         }
 
         .details-grid {
@@ -379,13 +302,12 @@
             margin-bottom: 10px;
         }
         
-        /* ESTILOS NUEVOS PARA EL MAPA */
         .map-container {
             width: 100%;
             height: 200px;
             margin-top: 15px;
             margin-bottom: 10px;
-            border-radius: 15px; /* Esquinas redondeadas */
+            border-radius: 15px; 
             overflow: hidden;
             box-shadow: 0 4px 10px rgba(184, 115, 51, 0.2);
             border: 1px solid rgba(184, 115, 51, 0.3);
@@ -413,57 +335,49 @@
             border-bottom: 2px solid var(--copper-mid);
         }
 
-        /* --- NUEVO ESTILO DETALLADO PARA LOS SOBRES --- */
         .envelope {
             position: absolute;
-            width: 50px;  /* Ligeramente más grande */
+            width: 50px; 
             height: 35px;
             background: #fff;
             border: 1px solid #e0e0e0; 
             z-index: 1;
             top: -40px; 
             animation: rainDown linear infinite; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra para profundidad */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
             border-radius: 2px;
         }
         
-        /* Solapa Superior (Abierta/Cerrada) */
         .envelope::before {
             content: '';
             position: absolute;
             top: 0; left: 0;
-            width: 0; 
-            height: 0;
+            width: 0; height: 0;
             border-style: solid;
-            border-width: 18px 25px 0 25px; /* Geometría de triángulo */
-            border-color: #f0f0f0 transparent transparent transparent; /* Color ligeramente diferente */
+            border-width: 18px 25px 0 25px; 
+            border-color: #f0f0f0 transparent transparent transparent; 
             z-index: 2;
             transform-origin: top;
         }
 
-        /* Pliegues inferiores (Fondo del sobre) */
         .envelope::after {
             content: '';
             position: absolute;
             bottom: 0; left: 0;
-            width: 0; 
-            height: 0;
+            width: 0; height: 0;
             border-style: solid;
-            border-width: 0 25px 15px 25px; /* Geometría inversa */
+            border-width: 0 25px 15px 25px; 
             border-color: transparent transparent #fafafa transparent;
             border-bottom-color: #f5f5f5;
             z-index: 1;
         }
 
-        /* Sello de lacre */
         .seal {
             position: absolute;
-            width: 8px;
-            height: 8px;
+            width: 8px; height: 8px;
             background: var(--copper-mid);
             border-radius: 50%;
-            top: 14px; /* Centro de unión */
-            left: 50%;
+            top: 14px; left: 50%;
             transform: translateX(-50%);
             z-index: 3;
             box-shadow: 0 1px 2px rgba(0,0,0,0.2);
@@ -473,7 +387,7 @@
         @keyframes rainDown {
             0% { top: -40px; opacity: 0; transform: rotate(0deg) translateX(0); }
             10% { opacity: 1; }
-            50% { transform: rotate(180deg) translateX(10px); } /* Añadido movimiento lateral */
+            50% { transform: rotate(180deg) translateX(10px); } 
             90% { opacity: 1; }
             100% { top: 160px; opacity: 0; transform: rotate(360deg) translateX(0); } 
         }
@@ -522,30 +436,33 @@
         .fade-in { animation: fadeIn 1.5s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- ADAPTACIÓN RESPONSIVA PARA CELULARES --- */
+        /* --- ADAPTACIÓN RESPONSIVA --- */
         @media (max-width: 768px) {
             .container {
-                width: 95%; /* Un poco más de margen lateral */
+                width: 95%; 
                 padding-bottom: 30px;
             }
 
             .celebrate-text {
-                font-size: 3.5rem; /* Reducir de 7rem a 3.5rem */
+                font-size: 3.5rem; 
             }
 
             .title-design-container {
-                height: 280px; /* Reducir de 500px a 280px */
+                /* MODIFICADO: Ajuste de altura automático para móvil también */
+                height: auto; 
                 margin-top: 5px;
             }
 
             .big-number {
-                font-size: 18rem; /* Reducir de 33rem a 18rem */
+                font-size: 18rem; 
                 letter-spacing: -15px;
             }
 
             .name-overlay {
-                font-size: 3.5rem; /* Reducir de 6rem a 3.5rem */
-                top: 60%; /* Ajustar posición vertical */
+                font-size: 5rem; /* Ajuste para móvil */
+                /* Quitar cualquier posicionamiento absoluto residual del móvil */
+                top: 20px; /* Un poco menos de bajada en móvil */
+                margin-bottom: 5px;
             }
 
             .years-label {
@@ -562,13 +479,13 @@
             }
             
             .flower-side {
-                width: 50px; /* Ramas más pequeñas en móvil */
+                width: 50px; 
                 top: -60px;
             }
 
-            /* --- CAMBIOS EN MÓVIL PARA EL PARALLAX --- */
+            /* OCULTAR FLORES PARALLAX EN MÓVIL */
             .parallax-flower {
-                display: none !important; /* SE OCULTAN COMPLETAMENTE EN MÓVIL */
+                display: none !important; 
             }
         }
 
@@ -578,15 +495,11 @@
 
     <!-- SISTEMA DE FONDO (Doble SVG para scroll infinito) -->
     <div id="background-wrapper">
-        <div id="scrolling-bg">
-            <!-- El contenido se inyectará aquí vía JS -->
-        </div>
+        <div id="scrolling-bg"></div>
     </div>
 
-    <!-- NUEVO: CAPA DE FLORES FLOTANTES (PARALLAX) -->
-    <!-- data-speed controla la velocidad: más alto = más rápido -->
+    <!-- CAPA DE FLORES FLOTANTES (PARALLAX) - Oculta en móviles por CSS -->
     <div class="parallax-wrapper">
-        <!-- RESTAURADO: Flor 1 Original -->
         <img src="https://www.clipartmax.com/png/full/57-570061_beautiful-flower-clipart-fall-watercolor-flowers-png.png" 
              class="parallax-flower p-flower-1" data-speed="0.1">
         
@@ -596,47 +509,40 @@
         <img src="https://static.vecteezy.com/system/resources/previews/013/855/180/non_2x/bouquet-of-pink-watercolor-flowers-free-png.png" 
              class="parallax-flower p-flower-3" data-speed="0.02">
              
-        <!-- RESTAURADO: Flor 4 Original -->
         <img src="https://images.vexels.com/media/users/3/294126/isolated/preview/9f80ca53cb77b2695615b308b6979ab6-watercolor-flower-delicate-nature.png" 
              class="parallax-flower p-flower-4" data-speed="-0.1">
 
-        <!-- NUEVO: Flor 5 (Izquierda Arriba Extra) -->
         <img src="https://png.pngtree.com/png-clipart/20230312/ourmid/pngtree-transparent-watercolor-flowers-png-image_6646331.png" 
              class="parallax-flower p-flower-5" data-speed="0.03">
 
-        <!-- NUEVO: Flor 6 (Derecha Abajo Extra) -->
         <img src="https://www.pngplay.com/wp-content/uploads/8/Pink-Water-Color-Flower-Transparent-Image.png" 
-             class="parallax-flower p-flower-6" data-speed="-0.08"> <!-- MODIFICADO: Velocidad reducida de -0.4 a -0.2 -->
+             class="parallax-flower p-flower-6" data-speed="-0.08">
     </div>
 
     <div class="container fade-in">
         
-        <!-- FLORES SUPERIORES: Usamos la imagen 1 de tu lista -->
+        <!-- FLORES SUPERIORES -->
         <img src="https://i.pinimg.com/736x/4a/ac/f7/4aacf7474637527f830e0f92022c9a8c.jpg" 
              alt="Decoración floral superior" 
              class="blend-img flower-top">
 
         <div class="header">
-            <!-- Texto modificado para usar clase CSS en lugar de estilo inline -->
             <div class="celebrate-text">
                 ¡Celebramos!
             </div>
 
-            <!-- DISEÑO 70 AUMENTADO DE TAMAÑO -->
+            <!-- DISEÑO 70 CON NOMBRE ARRIBA -->
             <div class="title-design-container">
-                <span class="big-number">7</span>
-                <div class="zero-wrapper">
-                    <span class="big-number">0</span>
-                    <span class="name-overlay">Angeles</span>
-                </div>
+                <!-- MODIFICADO: Nombre puesto ANTES del número -->
+                <div class="name-overlay">Angeles</div>
+                <span class="big-number">70</span>
             </div>
             
             <div class="years-label">Años</div>
         </div>
 
-        <!-- CONTENEDOR DE TEXTO Y RAMAS LATERALES -->
+        <!-- TEXTO Y RAMAS -->
         <div class="intro-text-container">
-            <!-- Ramas decorativas a los lados (Imagen 2) -->
             <div class="side-decoration-container">
                 <img src="https://i.pinimg.com/200x/9c/9e/ba/9c9eba4bb2393099e5030483f5a07d39.jpg" class="blend-img flower-side side-left" alt="rama">
                 <img src="https://i.pinimg.com/200x/9c/9e/ba/9c9eba4bb2393099e5030483f5a07d39.jpg" class="blend-img flower-side side-right" alt="rama">
@@ -654,7 +560,7 @@
             </div>
             <div class="divider">|</div>
             <div class="date-item">
-                <span class="date-month">Viernes</span>
+                <span class="date-month">Sábado</span>
                 <span class="date-number">2026</span>
             </div>
         </div>
@@ -665,7 +571,7 @@
                     <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm4.2 14.2L11 13V7h1.5v5.2l4.5 2.7-.8 1.3z"/>
                 </svg>
                 <h3>Hora</h3>
-                <p>5:00 PM</p> 
+                <p>2:30 PM</p> 
             </div>
             <div class="detail-item">
                 <svg class="icon-svg" viewBox="0 0 24 24">
@@ -673,27 +579,22 @@
                 </svg>
                 <h3>Lugar</h3>
                 
-                <!-- SECCIÓN ACTUALIZADA: NOMBRE, DIRECCIÓN Y MAPA VISUAL -->
-                <!-- He puesto la dirección correspondiente a las coordenadas -->
                 <p style="font-weight: bold; font-size: 1.1rem; margin-bottom: 5px;">Ubicación del Evento</p> 
                 <p>Gomez Farias No. 10, Apizaco, Tlaxcala</p> 
 
                 <div class="map-container">
-                    <!-- Mapa apuntando a 19.4138432, -98.1340485 -->
                     <iframe class="map-iframe" 
                             src="https://maps.google.com/maps?q=19.4138432,-98.1340485&t=&z=17&ie=UTF8&iwloc=&output=embed" 
                             frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
                     </iframe>
                 </div>
 
-                <!-- URL DE MAPA ACTUALIZADA -->
                 <a href="https://www.google.com/maps/search/?api=1&query=19.4138432,-98.1340485" target="_blank" style="color: var(--copper-mid); font-size: 0.9rem;">Ver ubicación en Google Maps</a>
             </div>
         </div>
 
         <div class="gift-section">
             <div class="animation-container">
-                <!-- Se agregó el div 'seal' dentro de cada sobre -->
                 <div class="envelope env1"><div class="seal"></div></div>
                 <div class="envelope env2"><div class="seal"></div></div>
                 <div class="envelope env3"><div class="seal"></div></div>
@@ -726,7 +627,6 @@
             </a>
         </div>
         
-        <!-- FLORES INFERIORES: Usamos la imagen 3 -->
         <img src="https://img.freepik.com/vector-premium/flores-hojas-boda_633622-894.jpg" 
              alt="Decoración floral inferior" 
              class="blend-img flower-bottom">
@@ -734,7 +634,6 @@
         <br>
     </div>
 
-    <!-- SCRIPT DE GENERACIÓN DINÁMICA DE SVG PARA FONDO + PARALLAX -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
@@ -743,23 +642,21 @@
                 const scrolled = window.scrollY;
                 document.querySelectorAll('.parallax-flower').forEach((el) => {
                     const speed = parseFloat(el.getAttribute('data-speed'));
-                    // Movemos el elemento en el eje Y basado en el scroll y su velocidad única
                     el.style.transform = `translateY(${scrolled * speed}px) rotate(${getRotation(el)}deg)`;
                 });
             });
 
-            // Función auxiliar para mantener la rotación original CSS al hacer transform JS
             function getRotation(el) {
                 if (el.classList.contains('p-flower-1')) return 45;
                 if (el.classList.contains('p-flower-2')) return -15;
                 if (el.classList.contains('p-flower-3')) return 20;
                 if (el.classList.contains('p-flower-4')) return -90;
-                if (el.classList.contains('p-flower-5')) return 10; // Nueva rotación Flor 5
-                if (el.classList.contains('p-flower-6')) return -20; // Nueva rotación Flor 6
+                if (el.classList.contains('p-flower-5')) return 10; 
+                if (el.classList.contains('p-flower-6')) return -20; 
                 return 0;
             }
 
-            // --- 2. FONDO SVG (Código existente intacto) ---
+            // --- 2. FONDO SVG ---
             const flowerPaths = [
                 "M167.1,256.6c-56.6,98-155.6-73.5-42.4-73.5c-113.1,0-14.1-171.5,42.4-73.5c-56.6-98,141.4-98,84.8,0 c56.6-98,155.6,73.5,42.4,73.5c113.1,0,14.1,171.5-42.4,73.5C308.5,354.6,110.5,354.6,167.1,256.6z",
                 "M496.2,251.5c-37.7,91.1-131.2-2.3-40-40c-91.1,37.7-91.1-94.4,0-56.6c-91.1-37.7,2.3-131.2,40-40 c-37.7-91.1,94.4-91.1,56.6,0c37.7-91.1,131.2,2.3,40,40c91.1-37.7,91.1,94.4,0,56.6c91.1,37.7-2.3,131.2-40,40 C590.6,342.6,458.4,342.6,496.2,251.5z",
