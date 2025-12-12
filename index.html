@@ -100,54 +100,72 @@
             
             opacity: 0.9; 
             transition: transform 0.1s linear; 
+            
+            /* PROPIEDAD CLAVE PARA RESPONSIVIDAD: 
+               La imagen mantendrá su relación de aspecto automáticamente */
+            height: auto;
         }
 
-        /* Posiciones específicas actualizadas (GIGANTES Y MITAD FUERA) */
+        /* --- ACTUALIZACIÓN DE POSICIONES Y TAMAÑOS (CENTRO EN ESQUINA) --- 
+           La lógica es: top/left negativo = -(ancho / 2). 
+           Esto pone el centro geométrico de la flor en la esquina de la pantalla.
+        */
+
         .p-flower-1 {
-            top: -15%; /* MODIFICADO: Más arriba para la nueva imagen */
-            left: -280px; 
-            width: 600px; 
+            /* Esquina Superior Izquierda */
+            /* width: 35vw -> mitad ~17.5vw */
+            top: -17.5vw; 
+            left: -17.5vw; 
+            width: 35vw; 
             transform: rotate(45deg);
         }
 
         .p-flower-2 {
-            top: -5%; 
-            right: -350px; 
-            width: 750px; 
+            /* Esquina Superior Derecha */
+            /* width: 45vw -> mitad ~22.5vw */
+            top: -22.5vw; 
+            right: -22.5vw; 
+            width: 45vw; 
             transform: rotate(-15deg);
         }
 
         .p-flower-3 {
-            bottom: -18%; 
-            left: -300px; 
-            width: 650px; 
+            /* Esquina Inferior Izquierda */
+            /* width: 40vw -> mitad ~20vw */
+            bottom: -20vw; 
+            left: -20vw; 
+            width: 40vw; 
             transform: rotate(20deg);
         }
 
-        /* Nueva flor agregada (Derecha Abajo) */
+        /* Flor CENTRADA VERTICALMENTE en el borde derecho (p-flower-4) */
         .p-flower-4 {
-            top: 55%; /* RESTAURADO: Posición original */
-            right: -280px; 
-            width: 620px; 
-            /* Rotación de 90 grados mantenida */
+            top: 50%; /* Centro vertical */
+            /* width: 35vw -> mitad fuera ~17.5vw */
+            right: -17.5vw; 
+            width: 35vw; 
+            margin-top: -17.5vw; /* Centrado vertical exacto */
             transform: rotate(-90deg);
         }
 
         /* --- NUEVAS FLORES AGREGADAS (5 y 6) --- */
         
-        /* Izquierda Arriba (La nueva) */
+        /* Izquierda Arriba (Refuerzo - Ligeramente desfasada) */
         .p-flower-5 {
-            top: -5%; /* MODIFICADO: Bajado de -20% a -5% para que sea visible */
-            left: -300px;
-            width: 650px;
+            /* width: 38vw -> mitad ~19vw */
+            top: -10vw;  /* Un poco más adentro verticalmente para variedad */
+            left: -19vw;
+            width: 38vw;
             transform: rotate(10deg);
         }
 
-        /* Derecha Abajo (La nueva que sale al final) */
+        /* Derecha Abajo (Refuerzo) */
         .p-flower-6 {
-            top: 110%; /* Inicia fuera de la pantalla abajo */
-            right: -300px;
-            width: 700px;
+            top: auto; 
+            /* width: 42vw -> mitad ~21vw */
+            bottom: -21vw; 
+            right: -21vw;
+            width: 42vw;
             transform: rotate(-20deg);
         }
 
@@ -548,20 +566,20 @@
                 top: -60px;
             }
 
-            /* --- CAMBIOS SOLICITADOS EN MÓVIL PARA EL PARALLAX --- */
-            /* Las flores desenfocadas se vuelven casi invisibles para no tapar texto */
+            /* --- CAMBIOS EN MÓVIL PARA EL PARALLAX --- */
             .parallax-flower {
-                opacity: 0.15 !important; /* Muy transparentes */
-                filter: blur(4px); /* Un poco más de blur */
+                opacity: 0.15 !important; 
+                filter: blur(4px); 
             }
             
-            /* Ajuste de tamaños en móvil para que no ocupen TODA la pantalla */
-            .p-flower-1 { width: 180px; left: -40px; }
-            .p-flower-2 { width: 200px; right: -50px; }
-            .p-flower-3 { width: 160px; left: -30px; }
-            .p-flower-4 { width: 180px; right: -40px; }
-            .p-flower-5 { width: 200px; left: -40px; } /* Ajuste móvil para nueva flor 5 */
-            .p-flower-6 { width: 200px; right: -50px; } /* Ajuste móvil para nueva flor 6 */
+            /* EN MÓVIL: Mantenemos la lógica de mitad fuera 
+               top/left/right negativos por aprox la mitad del ancho */
+            .p-flower-1 { width: 60vw; left: -30vw; top: -30vw; }
+            .p-flower-2 { width: 70vw; right: -35vw; top: -35vw; }
+            .p-flower-3 { width: 55vw; left: -27.5vw; bottom: -27.5vw; }
+            .p-flower-4 { width: 60vw; right: -30vw; margin-top: -30vw; } /* Centrado vertical en móvil */
+            .p-flower-5 { width: 65vw; left: -32.5vw; top: -20vw; }
+            .p-flower-6 { width: 70vw; right: -35vw; bottom: -35vw; }
         }
 
     </style>
@@ -755,7 +773,7 @@
             const flowerPaths = [
                 "M167.1,256.6c-56.6,98-155.6-73.5-42.4-73.5c-113.1,0-14.1-171.5,42.4-73.5c-56.6-98,141.4-98,84.8,0 c56.6-98,155.6,73.5,42.4,73.5c113.1,0,14.1,171.5-42.4,73.5C308.5,354.6,110.5,354.6,167.1,256.6z",
                 "M496.2,251.5c-37.7,91.1-131.2-2.3-40-40c-91.1,37.7-91.1-94.4,0-56.6c-91.1-37.7,2.3-131.2,40-40 c-37.7-91.1,94.4-91.1,56.6,0c37.7-91.1,131.2,2.3,40,40c91.1-37.7,91.1,94.4,0,56.6c91.1,37.7-2.3,131.2-40,40 C590.6,342.6,458.4,342.6,496.2,251.5z",
-                "M814.9,244c-47.7,81.2-106.3,22.6-25.1-25.1c-92.3,36.5-98.6,21.4-7.5-18c-91.1,23.7-91.1-59.1,0-35.5 c-91.1-39.4-84.9-54.6,7.5-18c-81.2-47.7-22.6-106.3,25.1-25.1c-36.5-92.3-21.4-98.6,18-7.5c-23.7-91.1,59.1-91.1,35.5,0 c39.4-91.1,54.6-84.9,18,7.5c47.7-81.2,106.3-22.6,25.1,25.1c92.3-36.5,98.6-21.4,7.5,18c91.1-23.7,91.1,59.1,0,35.5 c91.1,39.4,84.9,54.6-7.5,18c81.2,47.7,22.6,106.3-25.1,25.1c36.5,92.3,21.4,98.6-18,7.5c23.7,91.1-59.1,91.1-35.5,0 C793.5,342.6,778.4,336.3,814.9,244z",
+                "M814.9,244c-47.7,81.2-106.3,22.6-25.1-25.1c-92.3,36.5-98.6,21.4-7.5-18c-91.1,23.7-91.1-59.1,0-35.5 c-91.1-39.4-84.9-54.6,7.5-18c-81.2-47.7-22.6-106.3,25.1-25.1c-36.5-92.3-21.4-98.6,18-7.5c-23.7-91.1-59.1-91.1,35.5,0 c39.4-91.1,54.6-84.9,18,7.5c47.7-81.2,106.3-22.6,25.1,25.1c92.3-36.5,98.6-21.4,7.5,18c91.1-23.7,91.1,59.1,0,35.5 c91.1,39.4,84.9,54.6-7.5,18c81.2,47.7,22.6,106.3-25.1,25.1c36.5,92.3,21.4,98.6-18,7.5c23.7,91.1-59.1,91.1-35.5,0 C793.5,342.6,778.4,336.3,814.9,244z",
                 "M161.2,532.1C96.8,596.6,96.8,596.6,161.2,532.1c-94.3,34.5-111.2-6-20-48.3c-91.1,0-91.1,0,0,0 c-91.1-42.3-74.3-82.9,20-48.3c-64.4-64.4-64.4-64.4,0,0c-34.5-94.3,6-111.2,48.3-20c0-91.1,0-91.1,0,0c42.3-91.1,82.9-74.3,48.3,20 c64.4-64.4,64.4-64.4,0,0c94.3-34.5,111.2,6,20,48.3c91.1,0,91.1,0,0,0c91.1,42.3,74.3,82.9-20,48.3c64.4,64.4,64.4,64.4,0,0 c34.5,94.3-6,111.2-48.3,20c0,91.1,0,91.1,0,0C167.2,643.3,126.7,626.5,161.2,532.1z",
                 "M482.4,538.4c-56.1,72.8-85.3,43.6-12.5-12.5c-93.3,35.5-104.9,7.7-13.8-33.2c-91.1,11.8-91.1-29.5,0-17.7 c-91.1-40.9-79.6-68.7,13.8-33.2c-72.8-56.1-43.6-85.3,12.5-12.5c-35.5-93.3-7.7-104.9,33.2-13.8c-11.8-91.1,29.5-91.1,17.7,0 c40.9-91.1,68.7-79.6,33.2,13.8c56.1-72.8,85.3-43.6,12.5,12.5c93.3-35.5,104.9-7.7,13.8,33.2c91.1-11.8,91.1,29.5,0,17.7 c91.1,40.9,79.6,68.7-13.8,33.2c72.8,56.1,43.6,85.3-12.5,12.5c35.5,93.3,7.7,104.9-33.2,13.8c11.8,91.1-29.5,91.1-17.7,0 C474.8,643.3,446.9,631.7,482.4,538.4z",
                 "M820.1,549.9c-40.8,88.1-123.6,5.3-35.5-35.5c-91.5,37.4-93.4,32.8-2.3-5.5c-91.1,33.5-91.1-83.7,0-50.2 c-91.1-38.3-89.2-42.9,2.3-5.5c-88.1-40.8-5.3-123.6,35.5-35.5c-37.4-91.5-32.8-93.4,5.5-2.3c-33.5-91.1,83.7-91.1,50.2,0 c38.3-91.1,42.9-89.2,5.5,2.3c40.8-88.1,123.6-5.3,35.5,35.5c91.5-37.4,93.4-32.8,2.3,5.5c91.1-33.5,91.1,83.7,0,50.2 c91.1,38.3,89.2,42.9-2.3,5.5c88.1,40.8,5.3,123.6-35.5,35.5c37.4,91.5,32.8,93.4-5.5,2.3c33.5,91.1-83.7,91.1-50.2,0 C787.3,643.3,782.7,641.4,820.1,549.9z",
