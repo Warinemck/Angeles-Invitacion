@@ -44,6 +44,8 @@
             margin: -20px auto 10px auto; 
             position: relative;
             z-index: 10;
+            /* MODIFICADO: Rotación de 180 grados para que la flor de abajo se vea bien arriba */
+            transform: rotate(180deg); 
         }
 
         .flower-bottom {
@@ -179,9 +181,10 @@
         /* --- MODIFICACIÓN DEL TÍTULO 70 Y NOMBRE (STACK VERTICAL) --- */
         .title-design-container {
             position: relative;
-            height: auto; 
+            /* RESTAURADO: Altura fija para soportar posicionamiento absoluto */
+            height: 450px; 
             display: flex;
-            flex-direction: column; /* Apilar elementos verticalmente */
+            /* RESTAURADO: Sin flex-direction column para que el absolute funcione sobre el centro */
             justify-content: center;
             align-items: center;
             margin-top: 10px;
@@ -201,30 +204,34 @@
             position: relative;
             z-index: 1;
             letter-spacing: -25px; 
-            /* MODIFICADO: Mayor margen negativo para subir el 70 y juntarlo al nombre bajado */
-            margin-top: -80px;
+            /* RESTAURADO: Margen normal */
+            margin-top: 0;
         }
 
-        /* Estilo actualizado para "Angeles" ARRIBA del número */
+        /* Estilo para "Angeles" SOBREPUESTO AL NUMERO */
         .name-overlay {
-            position: relative;
-            /* MODIFICADO: Top positivo para bajar el nombre */
-            top: 30px; 
-            left: auto;
-            transform: rotate(-5deg); 
+            /* RESTAURADO: Posición absoluta centrada */
+            position: absolute;
+            top: 50%; 
+            left: 50%;
+            /* Centrado absoluto + leve inclinación */
+            transform: translate(-50%, -50%) rotate(-5deg); 
             
             font-family: 'Pinyon Script', cursive; 
             font-size: 8rem; 
             color: var(--copper-dark);
             
             text-shadow: 
-                3px 3px 0px rgba(255, 255, 255, 0.95),
-                -1px -1px 0 rgba(255, 255, 255, 0.95);
+                4px 4px 0px rgba(255, 255, 255, 0.95),
+                -3px -3px 0 rgba(255, 255, 255, 0.95),  
+                3px -3px 0 rgba(255, 255, 255, 0.95),
+                -3px 3px 0 rgba(255, 255, 255, 0.95),
+                0px 0px 15px rgba(255, 255, 255, 1);
             
             white-space: nowrap;
             z-index: 10;
             width: auto;
-            margin-bottom: 10px;
+            margin-bottom: 0;
         }
 
         .years-label {
@@ -233,7 +240,7 @@
             color: var(--copper-mid);
             letter-spacing: 5px;
             text-transform: uppercase;
-            margin-top: 20px; 
+            margin-top: 10px; 
             margin-bottom: 30px;
         }
 
@@ -448,21 +455,23 @@
             }
 
             .title-design-container {
-                /* MODIFICADO: Ajuste de altura automático para móvil también */
-                height: auto; 
+                /* RESTAURADO: Altura fija en móvil */
+                height: 280px; 
                 margin-top: 5px;
             }
 
             .big-number {
                 font-size: 18rem; 
                 letter-spacing: -15px;
+                /* Sin margen negativo en móvil para este diseño centrado */
+                margin-top: 0; 
             }
 
             .name-overlay {
-                font-size: 5rem; /* Ajuste para móvil */
-                /* Quitar cualquier posicionamiento absoluto residual del móvil */
-                top: 20px; /* Un poco menos de bajada en móvil */
-                margin-bottom: 5px;
+                font-size: 5rem; 
+                /* Centrado absoluto también en móvil */
+                top: 50%; 
+                margin-bottom: 0;
             }
 
             .years-label {
@@ -521,8 +530,8 @@
 
     <div class="container fade-in">
         
-        <!-- FLORES SUPERIORES -->
-        <img src="https://i.pinimg.com/736x/4a/ac/f7/4aacf7474637527f830e0f92022c9a8c.jpg" 
+        <!-- FLORES SUPERIORES: MISMA IMAGEN QUE ABAJO, ROTADA -->
+        <img src="https://img.freepik.com/vector-premium/flores-hojas-boda_633622-894.jpg" 
              alt="Decoración floral superior" 
              class="blend-img flower-top">
 
@@ -533,9 +542,8 @@
 
             <!-- DISEÑO 70 CON NOMBRE ARRIBA -->
             <div class="title-design-container">
-                <!-- MODIFICADO: Nombre puesto ANTES del número -->
-                <div class="name-overlay">Angeles</div>
                 <span class="big-number">70</span>
+                <div class="name-overlay">Angeles</div>
             </div>
             
             <div class="years-label">Años</div>
@@ -603,11 +611,11 @@
                 <div class="envelope env6"><div class="seal"></div></div>
             </div>
             <div style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--copper-dark); margin-bottom: 10px;">
-                Lluvia de Cartas
+                Lluvia de Sobres
             </div>
             <p style="font-style: italic; color: var(--copper-dark); font-size: 0.95rem;">
                 Tu presencia es mi mayor regalo. Si deseas tener un detalle adicional, 
-                podrás depositar un sobre en el buzón que encontrarás en la recepción.
+                podrás depositar un sobre en la cajita que encontrarás en la recepción.
             </p>
         </div>
 
