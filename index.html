@@ -78,7 +78,7 @@
             right: -10px;
         }
 
-        /* --- PARALLAX (Flores flotantes) --- */
+        /* --- PARALLAX (Flores flotantes - Desktop) --- */
         .parallax-wrapper {
             position: fixed;
             top: 0;
@@ -98,13 +98,19 @@
             height: auto;
         }
 
-        /* Posiciones Parallax (Centro en Esquina) */
+        /* Posiciones Parallax (Centro en Esquina - Desktop) */
         .p-flower-1 { top: -17.5vw; left: -17.5vw; width: 35vw; transform: rotate(45deg); }
         .p-flower-2 { top: -22.5vw; right: -22.5vw; width: 45vw; transform: rotate(-15deg); }
         .p-flower-3 { bottom: -20vw; left: -20vw; width: 40vw; transform: rotate(20deg); }
         .p-flower-4 { top: 50%; right: -17.5vw; width: 35vw; margin-top: -17.5vw; transform: rotate(-90deg); }
         .p-flower-5 { top: 15vw; left: -9vw; width: 25vw; transform: rotate(10deg); }
         .p-flower-6 { top: auto; bottom: -21vw; right: -21vw; width: 42vw; transform: rotate(-20deg); }
+
+        /* --- FLORES ESTÁTICAS (Móvil) --- */
+        /* Por defecto ocultas en escritorio */
+        .static-flower {
+            display: none;
+        }
 
         /* --- FONDO ANIMADO --- */
         #background-wrapper {
@@ -448,6 +454,8 @@
             .container {
                 width: 95%; 
                 padding-bottom: 30px;
+                /* Importante: para cortar las flores que se salgan del borde blanco */
+                overflow: hidden; 
             }
 
             .celebrate-text {
@@ -463,13 +471,11 @@
             .big-number {
                 font-size: 18rem; 
                 letter-spacing: -15px;
-                /* Sin margen negativo en móvil para este diseño centrado */
                 margin-top: 0; 
             }
 
             .name-overlay {
                 font-size: 5rem; 
-                /* Centrado absoluto también en móvil */
                 top: 50%; 
                 margin-bottom: 0;
             }
@@ -492,10 +498,34 @@
                 top: -60px;
             }
 
-            /* OCULTAR FLORES PARALLAX EN MÓVIL */
+            /* 1. OCULTAR FLORES PARALLAX ORIGINALES EN MÓVIL */
             .parallax-flower {
                 display: none !important; 
             }
+
+            /* 2. MOSTRAR FLORES ESTÁTICAS SOLO EN MÓVIL */
+            .static-flower {
+                display: block; /* Se muestran */
+                position: absolute;
+                z-index: 0; /* Fondo del contenedor */
+                opacity: 0.6; /* Un poco transparentes para no molestar */
+                /* Filtro igual al original */
+                filter: sepia(0.8) saturate(1.5) hue-rotate(10deg) brightness(0.9);
+                pointer-events: none;
+            }
+
+            /* 3. POSICIONAMIENTO SIMÉTRICO DISTRIBUIDO (MÓVIL) */
+            /* Par Superior */
+            .sf-1 { width: 150px; top: -20px; left: -40px; transform: rotate(45deg); }
+            .sf-2 { width: 160px; top: -10px; right: -50px; transform: rotate(-15deg); }
+            
+            /* Par Medio (Cerca de Fecha/Hora) */
+            .sf-3 { width: 140px; top: 40%; left: -50px; transform: rotate(20deg); }
+            .sf-4 { width: 140px; top: 45%; right: -50px; transform: rotate(-90deg); }
+
+            /* Par Inferior (Cerca de Regalos/Confirmar) */
+            .sf-5 { width: 150px; bottom: 10%; left: -40px; transform: rotate(10deg); }
+            .sf-6 { width: 160px; bottom: 5%; right: -50px; transform: rotate(-20deg); }
         }
 
     </style>
@@ -507,29 +537,32 @@
         <div id="scrolling-bg"></div>
     </div>
 
-    <!-- CAPA DE FLORES FLOTANTES (PARALLAX) - Oculta en móviles por CSS -->
+    <!-- CAPA DE FLORES FLOTANTES (PARALLAX - DESKTOP) -->
     <div class="parallax-wrapper">
         <img src="https://www.clipartmax.com/png/full/57-570061_beautiful-flower-clipart-fall-watercolor-flowers-png.png" 
              class="parallax-flower p-flower-1" data-speed="0.1">
-        
         <img src="https://www.pngall.com/wp-content/uploads/5/Corner-Watercolor-Flower.png" 
              class="parallax-flower p-flower-2" data-speed="-0.05">
-        
         <img src="https://static.vecteezy.com/system/resources/previews/013/855/180/non_2x/bouquet-of-pink-watercolor-flowers-free-png.png" 
              class="parallax-flower p-flower-3" data-speed="0.02">
-             
         <img src="https://images.vexels.com/media/users/3/294126/isolated/preview/9f80ca53cb77b2695615b308b6979ab6-watercolor-flower-delicate-nature.png" 
              class="parallax-flower p-flower-4" data-speed="-0.1">
-
         <img src="https://png.pngtree.com/png-clipart/20230312/ourmid/pngtree-transparent-watercolor-flowers-png-image_6646331.png" 
              class="parallax-flower p-flower-5" data-speed="0.03">
-
         <img src="https://www.pngplay.com/wp-content/uploads/8/Pink-Water-Color-Flower-Transparent-Image.png" 
              class="parallax-flower p-flower-6" data-speed="-0.08">
     </div>
 
     <div class="container fade-in">
         
+        <!-- NUEVO: FLORES ESTÁTICAS PARA MÓVIL (DENTRO DEL CONTENEDOR) -->
+        <img src="https://www.clipartmax.com/png/full/57-570061_beautiful-flower-clipart-fall-watercolor-flowers-png.png" class="static-flower sf-1">
+        <img src="https://www.pngall.com/wp-content/uploads/5/Corner-Watercolor-Flower.png" class="static-flower sf-2">
+        <img src="https://static.vecteezy.com/system/resources/previews/013/855/180/non_2x/bouquet-of-pink-watercolor-flowers-free-png.png" class="static-flower sf-3">
+        <img src="https://images.vexels.com/media/users/3/294126/isolated/preview/9f80ca53cb77b2695615b308b6979ab6-watercolor-flower-delicate-nature.png" class="static-flower sf-4">
+        <img src="https://png.pngtree.com/png-clipart/20230312/ourmid/pngtree-transparent-watercolor-flowers-png-image_6646331.png" class="static-flower sf-5">
+        <img src="https://www.pngplay.com/wp-content/uploads/8/Pink-Water-Color-Flower-Transparent-Image.png" class="static-flower sf-6">
+
         <!-- FLORES SUPERIORES: MISMA IMAGEN QUE ABAJO, ROTADA -->
         <img src="https://img.freepik.com/vector-premium/flores-hojas-boda_633622-894.jpg" 
              alt="Decoración floral superior" 
@@ -645,13 +678,16 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            /* --- 1. LÓGICA DE PARALLAX VERTICAL --- */
+            /* --- 1. LÓGICA DE PARALLAX VERTICAL (SOLO DESKTOP) --- */
             window.addEventListener('scroll', () => {
-                const scrolled = window.scrollY;
-                document.querySelectorAll('.parallax-flower').forEach((el) => {
-                    const speed = parseFloat(el.getAttribute('data-speed'));
-                    el.style.transform = `translateY(${scrolled * speed}px) rotate(${getRotation(el)}deg)`;
-                });
+                // Solo ejecutar si es pantalla grande para optimizar
+                if (window.innerWidth > 768) {
+                    const scrolled = window.scrollY;
+                    document.querySelectorAll('.parallax-flower').forEach((el) => {
+                        const speed = parseFloat(el.getAttribute('data-speed'));
+                        el.style.transform = `translateY(${scrolled * speed}px) rotate(${getRotation(el)}deg)`;
+                    });
+                }
             });
 
             function getRotation(el) {
